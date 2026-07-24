@@ -78,8 +78,11 @@ export function BridgeGlobalOrchestrator() {
           res = await sendToGemini(fullPrompt, req.files)
         }
 
+        console.log(`[BridgeOrchestrator] 收到 ${engineName} 原始响应内容:`, res)
+
         if (res.success && res.content) {
           const cleanedContent = cleanBridgeResponse(res.content)
+          addLog(`[网页端响应内容] ${cleanedContent.slice(0, 150)}...`, 'info')
           const isRefusal = /sorry|can't|cannot|safety|policy|违规|无法处理|无法生成|不支持|敏感|拒绝|风控|无法为您/i.test(cleanedContent) ||
             ((isVideoRequest || isImageRequest) && !cleanedContent.includes('http'))
 
