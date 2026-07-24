@@ -71,7 +71,7 @@ export function BridgeGlobalOrchestrator() {
       try {
         let res
         if (effectiveEngine === 'doubao') {
-          res = isImageRequest ? await sendToDoubaoImage(fullPrompt) : await sendToDoubao(fullPrompt)
+          res = isImageRequest ? await sendToDoubaoImage(fullPrompt) : await sendToDoubao(fullPrompt, req.files)
         } else if (effectiveEngine === 'deepseek') {
           res = await sendToDeepSeek(fullPrompt)
         } else {

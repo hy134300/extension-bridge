@@ -81,8 +81,8 @@ export async function sendToDeepSeek(message: string): Promise<ExtensionResponse
 }
 
 // 发送消息到 Doubao
-export async function sendToDoubao(message: string): Promise<ExtensionResponse> {
-  return sendMessageToExtension('sendToDoubao', { message });
+export async function sendToDoubao(message: string, files?: ExtensionFilePayload[]): Promise<ExtensionResponse> {
+  return sendMessageToExtension('sendToDoubao', { message, files: files || [] });
 }
 
 // 发送消息到 Gemini
