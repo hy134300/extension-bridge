@@ -80,7 +80,8 @@ export function BridgeGlobalOrchestrator() {
 
         if (res.success && res.content) {
           const cleanedContent = cleanBridgeResponse(res.content)
-          const isRefusal = /sorry|can't|cannot|safety|policy|违规|无法处理|无法生成|不支持|敏感/i.test(cleanedContent)
+          const isRefusal = /sorry|can't|cannot|safety|policy|违规|无法处理|无法生成|不支持|敏感|原因|拒绝|风控|无法为您/i.test(cleanedContent) ||
+            ((isVideoRequest || isImageRequest) && !cleanedContent.includes('http'))
 
           if (isRefusal && (isVideoRequest || isImageRequest)) {
             addLog(`❌ AI网页端拦截拒答（提示词安全/违规）`, 'error')
